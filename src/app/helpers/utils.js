@@ -3,14 +3,14 @@ const SSR = typeof window === "undefined";
 const partialNodesRegex = /^\s*\{\s*"nodes"\s*:\s*\[.*\}\s*\,?\s*$/s;
 const partialEdgesRegex = /^\s*\{\s*"edges"\s*:\s*\[.*\}\s*\,?\s*$/s;
 
-// Funciones actualizadas con validación de expresión regular
 export function parsePartialNodesJSON(jsonString) {
   try {
+    console.log("Parsing nodes:", jsonString);
     jsonString = jsonString.trim();
 
     // Verificar con la expresión regular
     if (!partialNodesRegex.test(jsonString)) {
-
+      console.log("Nodes regex did not match");
       return [];
     }
 
@@ -26,18 +26,19 @@ export function parsePartialNodesJSON(jsonString) {
     }
     return [];
   } catch (e) {
-
+    console.log("Error parsing nodes:", e);
     return [];
   }
 }
 
 export function parsePartialEdgesJSON(jsonString) {
   try {
+    console.log("Parsing edges:", jsonString);
     jsonString = jsonString.trim();
 
     // Verificar con la expresión regular
     if (!partialEdgesRegex.test(jsonString)) {
-     
+      console.log("Edges regex did not match");
       return [];
     }
 
@@ -53,10 +54,11 @@ export function parsePartialEdgesJSON(jsonString) {
     }
     return [];
   } catch (e) {
-    
+    console.log("Error parsing edges:", e);
     return [];
   }
 }
+
 
 
 

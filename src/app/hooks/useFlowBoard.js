@@ -68,7 +68,7 @@ const initialEdges = [
 ];
 
 export default function useFlowBoard() {
-  const { info, success, error } = useToast();
+  const { info, success, error ,warn} = useToast();
   const diagramResult = getLocalStorage("diagramResult");
   const edgeReconnectSuccessful = useRef(true);
   const [isOpen, toggleOpen] = useToggle();
@@ -93,6 +93,8 @@ export default function useFlowBoard() {
         edges,
         prompt,
       });
+      setNodes(nodes);
+      setEdges(edges);
       success("Diagram generated successfully");
     },
   });
@@ -166,10 +168,15 @@ export default function useFlowBoard() {
     setLocalStorage("isMagicText", e.target.checked);
   }, []);
 
-  const generateDiagram = useCallback(async () => {
+  const generateDiagram = useCallback(() => {
     info("Generating diagram...");
     complete(prompt);
   }, [complete, prompt, info]);
+
+  const cancelDiagram = useCallback(() => {
+    warn("Cancelled diagram generation");
+    stop();
+  }, [stop, warn]);
 
   useEffect(() => {
     if (!completion) return;
@@ -204,6 +211,6 @@ export default function useFlowBoard() {
     generateDiagram,
     nodes,
     edges,
-    stop,
+    stop: cancelDiagram,
   };
 }
