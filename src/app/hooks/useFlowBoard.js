@@ -68,7 +68,7 @@ const initialEdges = [
 ];
 
 export default function useFlowBoard() {
-  const { info, success, error ,warn} = useToast();
+  const { info, success, error, warn } = useToast();
   const diagramResult = getLocalStorage("diagramResult");
   const edgeReconnectSuccessful = useRef(true);
   const [isOpen, toggleOpen] = useToggle();
@@ -178,6 +178,13 @@ export default function useFlowBoard() {
     stop();
   }, [stop, warn]);
 
+  const onNodesChangePosition = useCallback(
+    (props) => {
+      onNodesChange(props);
+    },
+    [onNodesChange]
+  );
+
   useEffect(() => {
     if (!completion) return;
 
@@ -197,7 +204,7 @@ export default function useFlowBoard() {
     onReconnectEnd,
     onReconnect,
     onReconnectStart,
-    onNodesChange,
+    onNodesChange: onNodesChangePosition,
     onEdgesChange,
     onConnect,
     onChangeText,
