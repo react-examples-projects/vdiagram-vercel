@@ -83,7 +83,7 @@ function Board({
         onReconnectStart={onReconnectStart}
         onReconnectEnd={onReconnectEnd}
         onConnect={onConnect}
-        fitView
+        fitView={false}
         selectionOnDrag
         snapToGrid
         panOnDrag={panOnDrag}

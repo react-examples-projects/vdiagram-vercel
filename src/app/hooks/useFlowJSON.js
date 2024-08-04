@@ -10,7 +10,6 @@ export default function useFlowJSON() {
       nodes,
       edges,
     };
-    console.log(json);
     downloadDiagram(json);
   };
 

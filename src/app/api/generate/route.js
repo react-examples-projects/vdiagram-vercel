@@ -26,6 +26,8 @@ export async function POST(req) {
       return new Response("Prompt is required", { status: 400 });
     }
 
+    console.log({ isMagicText });
+
     if (isMagicText) {
       const { text } = await generateText({
         model: openai("gpt-4o-mini"),
@@ -35,6 +37,7 @@ export async function POST(req) {
       $prompt = text;
     }
 
+    console.log($prompt);
     const result = await streamText({
       model: openai("gpt-4o-mini"),
       system: systemPrompt,

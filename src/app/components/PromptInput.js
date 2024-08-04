@@ -1,4 +1,5 @@
 "use client";
+import Loader from "react-loaders";
 import { Textarea, Button } from "@geist-ui/core";
 import { BsArrowUpCircleFill } from "react-icons/bs";
 import { BsFillStopCircleFill } from "react-icons/bs";
@@ -13,6 +14,8 @@ export default function PromptInput({
 }) {
   return (
     <div className="input">
+      {isLoading && <Loader type="ball-pulse-sync" className="input-loader" />}
+      
       <div className="input-wrapper">
         <Textarea
           disabled={isLoading}

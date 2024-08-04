@@ -5,12 +5,9 @@ const partialEdgesRegex = /^\s*\{\s*"edges"\s*:\s*\[.*\}\s*\,?\s*$/s;
 
 export function parsePartialNodesJSON(jsonString) {
   try {
-    console.log("Parsing nodes:", jsonString);
     jsonString = jsonString.trim();
 
-    // Verificar con la expresión regular
     if (!partialNodesRegex.test(jsonString)) {
-      console.log("Nodes regex did not match");
       return [];
     }
 
@@ -26,19 +23,15 @@ export function parsePartialNodesJSON(jsonString) {
     }
     return [];
   } catch (e) {
-    console.log("Error parsing nodes:", e);
     return [];
   }
 }
 
 export function parsePartialEdgesJSON(jsonString) {
   try {
-    console.log("Parsing edges:", jsonString);
     jsonString = jsonString.trim();
 
-    // Verificar con la expresión regular
     if (!partialEdgesRegex.test(jsonString)) {
-      console.log("Edges regex did not match");
       return [];
     }
 
@@ -54,55 +47,9 @@ export function parsePartialEdgesJSON(jsonString) {
     }
     return [];
   } catch (e) {
-    console.log("Error parsing edges:", e);
     return [];
   }
 }
-
-
-
-
-// export function parsePartialNodesJSON(jsonString) {
-//   try {
-//     jsonString = jsonString.trim();
-
-//     let lastClosingBracketIndex = jsonString.lastIndexOf("}");
-//     if (lastClosingBracketIndex !== -1) {
-//       jsonString = jsonString.substring(0, lastClosingBracketIndex + 1);
-//       jsonString += "]}";
-//       let data = JSON.parse(jsonString);
-//       if (data.nodes && data.nodes.length > 0) {
-//         return data.nodes;
-//       }
-//       return [];
-//     }
-//     return [];
-//   } catch (e) {
-//     console.error("Error al parsear el JSON:", e);
-//     return [];
-//   }
-// }
-
-// export function parsePartialEdgesJSON(jsonString) {
-//   try {
-//     jsonString = jsonString.trim();
-
-//     let lastClosingBracketIndex = jsonString.lastIndexOf("}");
-//     if (lastClosingBracketIndex !== -1) {
-//       jsonString = jsonString.substring(0, lastClosingBracketIndex + 1);
-//       jsonString += "]}";
-//       let data = JSON.parse(jsonString);
-//       if (data.edges && data.edges.length > 0) {
-//         return data.edges;
-//       }
-//       return [];
-//     }
-//     return [];
-//   } catch (e) {
-//     console.error("Error al parsear el JSON:", e);
-//     return [];
-//   }
-// }
 
 export function generateFilename({ name, fileType }) {
   const now = new Date();

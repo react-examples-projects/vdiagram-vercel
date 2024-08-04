@@ -81,7 +81,7 @@ svg {
 button.submit {
   position: absolute !important;
   right: 1rem;
-  z-index: 10;
+  z-index: 999;
   padding: 0.5rem !important;
   display: flex !important;
   align-items: center;
@@ -133,6 +133,21 @@ button.submit {
 
 .block {
   display: block !important;
+}
+
+.ball-pulse-sync > div {
+  width: 8px !important;
+  height: 8px !important;
+  background-color: #eeeeeea9 !important;
+}
+
+.input-loader {
+  position: absolute;
+  z-index: 999;
+  width: 90%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.856);
+  border-radius: 7px;
 }
 
 @for $i from 0 through 100 {

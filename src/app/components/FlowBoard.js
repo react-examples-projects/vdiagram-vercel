@@ -4,7 +4,6 @@ import PromptInput from "./PromptInput";
 import SettingsButton from "./SettingsButton";
 import useFlowBoard from "../hooks/useFlowBoard";
 import Board from "./Board";
-import { useEffect } from "react";
 
 export default function FlowBoard() {
   const {
@@ -27,10 +26,6 @@ export default function FlowBoard() {
     onChangeIsMagicText,
     generateDiagram,
   } = useFlowBoard();
-
-  useEffect(() => {
-    console.log(document.readyState);
-  }, []);
 
   return (
     <>

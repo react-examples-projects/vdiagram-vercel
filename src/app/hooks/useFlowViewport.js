@@ -14,6 +14,10 @@ export default function useFlowViewport() {
 
   useOnViewportChange({
     onStart(newViewport) {
+       renderCount.current++;
+       if (renderCount.current <= RENDER_COUNT_DIAGRAM) {
+         return;
+       }
       setViewport(newViewport);
       window.localStorage.setItem("viewport", JSON.stringify(newViewport));
     },

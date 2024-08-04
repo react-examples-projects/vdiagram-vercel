@@ -170,8 +170,10 @@ export default function useFlowBoard() {
 
   const generateDiagram = useCallback(() => {
     info("Generating diagram...");
-    complete(prompt);
-  }, [complete, prompt, info]);
+    complete(prompt, {
+      body: { isMagicText },
+    });
+  }, [complete, prompt, info, isMagicText]);
 
   const cancelDiagram = useCallback(() => {
     warn("Cancelled diagram generation");
@@ -179,8 +181,28 @@ export default function useFlowBoard() {
   }, [stop, warn]);
 
   const onNodesChangePosition = useCallback(
-    (props) => {
-      onNodesChange(props);
+    (nodes) => {
+      const diagramResult = getLocalStorage("diagramResult");
+      let $nodes = structuredClone(nodes); // no modofy the original nodes oject passsed to diagram
+      $nodes = $nodes.filter((node) => node.type === "position");
+
+      if ($nodes.length > 0) {
+        $nodes.forEach((node) => {
+          const nodeId = node.id;
+          const { x, y } = node.position;
+
+          diagramResult.nodes.forEach((node) => {
+            if (node.id === nodeId) {
+              node.position.x = x;
+              node.position.y = y;
+            }
+          });
+        });
+
+        setLocalStorage("diagramResult", diagramResult);
+      }
+
+      onNodesChange(nodes);
     },
     [onNodesChange]
   );
