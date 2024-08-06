@@ -4,7 +4,6 @@ import Editor from "@monaco-editor/react";
 
 export default function DrawerCode({ isOpen, toggleOpen, nodes, edges }) {
   const data = JSON.stringify({ nodes, edges }, null, 2);
-  const [code, setCode] = React.useState(data);
   return (
     <Drawer visible={isOpen} onClose={toggleOpen} placement="right" width="700px">
       <Drawer.Title>Code</Drawer.Title>
