@@ -3,7 +3,6 @@ const SSR = typeof window === "undefined";
 const partialNodesRegex = /^\s*\{\s*"nodes"\s*:\s*\[.*\}\s*,?\s*$/s;
 const partialEdgesRegex = /^\s*\{\s*"edges"\s*:\s*\[.*\}\s*,?\s*$/s;
 
-
 export function parsePartialNodesJSON(jsonString) {
   try {
     jsonString = jsonString.trim();
@@ -110,4 +109,46 @@ export function removeLocalStorage(key) {
   if (SSR) return;
 
   localStorage.removeItem(key);
+}
+
+export function getFileContent(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      resolve(e.target.result);
+    };
+    reader.onerror = (err) => {
+      reject(err);
+    };
+    reader.readAsText(file);
+  });
+}
+
+export async function createInputFile() {
+  return new Promise((resolve, reject) => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json";
+
+    input.onchange = () => {
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        resolve(JSON.parse(event.target.result));
+      };
+
+      reader.onerror = (err) => {
+        reject(err);
+      };
+
+      if (file) {
+        reader.readAsText(file);
+      } else {
+        reject(new Error("No file selected"));
+      }
+    };
+
+    input.click();
+  });
 }

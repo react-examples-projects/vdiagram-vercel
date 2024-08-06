@@ -10,16 +10,16 @@ import {
   getViewportForBounds,
 } from "@xyflow/react";
 import { Button } from "@geist-ui/core";
-import { memo } from "react";
 import { GrDocumentDownload } from "react-icons/gr";
 import { GrDocumentImage } from "react-icons/gr";
-
+import { BsFiletypeJson } from "react-icons/bs";
 import { toPng, toJpeg, toSvg } from "html-to-image";
 import { downloadFile } from "../helpers/utils";
 import cls from "classnames";
 import useConfig from "../hooks/useConfig";
 import useFlowViewport from "../hooks/useFlowViewport";
 import useFlowJSON from "../hooks/useFlowJSON";
+
 const panOnDrag = [1, 2];
 const imageWidth = 1024;
 const imageHeight = 768;
@@ -33,6 +33,7 @@ function Board({
   onReconnectEnd,
   onReconnect,
   onReconnectStart,
+  importJSONDiagram,
 }) {
   const viewport = useFlowViewport();
   const { exportDiagramJSON } = useFlowJSON();
@@ -71,6 +72,8 @@ function Board({
       downloadFile({ dataUrl, fileType: imageFormat })
     );
   };
+
+  console.log({ nodes, edges });
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
@@ -120,9 +123,19 @@ function Board({
             scale={2.5}
             auto
           />
+
+          <Button
+            title="Import JSON"
+            aria-label="Import JSON"
+            type="abort"
+            onClick={importJSONDiagram}
+            iconRight={<BsFiletypeJson color={theme === "dark" ? "#fff" : "#000"} />}
+            scale={2.8}
+            auto
+          />
         </div>
       </ReactFlow>
     </div>
   );
 }
-export default memo(Board);
+export default Board;

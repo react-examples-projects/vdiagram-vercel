@@ -25,6 +25,7 @@ export default function FlowBoard() {
     stop,
     onChangeIsMagicText,
     generateDiagram,
+    importJSONDiagram,
   } = useFlowBoard();
 
   return (
@@ -52,6 +53,7 @@ export default function FlowBoard() {
           onReconnect,
           onReconnectStart,
           onReconnectEnd,
+          importJSONDiagram,
         }}
       />
 

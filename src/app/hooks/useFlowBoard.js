@@ -7,6 +7,7 @@ import {
   parsePartialNodesJSON,
   setLocalStorage,
   getLocalStorage,
+  createInputFile,
 } from "../helpers/utils";
 import { addEdge, reconnectEdge, useNodesState, useEdgesState } from "@xyflow/react";
 import { useCompletion } from "ai/react";
@@ -76,12 +77,17 @@ export default function useFlowBoard() {
   const [isOpen, toggleOpen] = useToggle();
   const [isMagicText, setIsMagicText] = useState(getLocalStorage("isMagicText") ?? true);
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(diagramResult?.nodes ?? initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(diagramResult?.edges ?? initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState(
+    () => diagramResult?.nodes ?? initialNodes
+  );
+  const [edges, setEdges, onEdgesChange] = useEdgesState(
+    () => diagramResult?.edges ?? initialEdges
+  );
   const [prompt, setPrompt] = useState(
     diagramResult?.prompt ??
       "Develop a sales system to manage customer orders, process payments, and generate invoices"
   );
+
   const { complete, completion, isLoading, stop } = useCompletion({
     api: "/api/generate",
     onError: (err) => {
@@ -185,7 +191,7 @@ export default function useFlowBoard() {
   const onNodesChangePosition = useCallback(
     (nodes) => {
       const diagramResult = getLocalStorage("diagramResult");
-      let $nodes = structuredClone(nodes); // no modofy the original nodes oject passsed to diagram
+      let $nodes = structuredClone(nodes); // no modify the original nodes oject passsed to diagram
       $nodes = $nodes.filter((node) => node.type === "position");
 
       if ($nodes.length > 0) {
@@ -209,6 +215,19 @@ export default function useFlowBoard() {
     [onNodesChange]
   );
 
+  const importJSONDiagram = useCallback(async () => {
+    const json = await createInputFile();
+    const { nodes, edges } = json;
+    const prevDiagramResult = getLocalStorage("diagramResult");
+    setLocalStorage("diagramResult", {
+      ...prevDiagramResult,
+      nodes,
+      edges,
+    });
+    setNodes(nodes);
+    setEdges(edges);
+  }, [setEdges, setNodes]);
+  
   useEffect(() => {
     if (!completion) return;
 
@@ -243,5 +262,6 @@ export default function useFlowBoard() {
     nodes,
     edges,
     stop: cancelDiagram,
+    importJSONDiagram,
   };
 }
