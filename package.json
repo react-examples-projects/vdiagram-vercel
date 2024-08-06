@@ -11,6 +11,7 @@
   "dependencies": {
     "@ai-sdk/openai": "^0.0.40",
     "@geist-ui/core": "^2.3.8",
+    "@monaco-editor/react": "^4.6.0",
     "@xyflow/react": "^12.0.4",
     "ai": "^3.2.43",
     "axios": "^1.7.2",
@@ -19,6 +20,7 @@
     "loaders.css": "^0.1.2",
     "next": "14.2.5",
     "openai": "^4.53.2",
+    "prismjs": "^1.29.0",
     "rc-slider": "^11.1.5",
     "react": "^18",
     "react-dom": "^18",

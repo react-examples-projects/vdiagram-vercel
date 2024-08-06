@@ -16,7 +16,8 @@ import useConfig from "../hooks/useConfig";
 const initialNodes = [
   {
     id: "1",
-    type: "input",
+    // type: "input",
+    type: "customNode",
     data: { label: "Start Process" },
     position: { x: 250, y: 25 },
   },
@@ -76,6 +77,7 @@ export default function useFlowBoard() {
   const edgeReconnectSuccessful = useRef(true);
   const [isOpen, toggleOpen] = useToggle();
   const [isMagicText, setIsMagicText] = useState(getLocalStorage("isMagicText") ?? true);
+  const [isOpenCode, toggleOpenCode] = useToggle();
 
   const [nodes, setNodes, onNodesChange] = useNodesState(
     () => diagramResult?.nodes ?? initialNodes
@@ -194,7 +196,7 @@ export default function useFlowBoard() {
       let $nodes = structuredClone(nodes); // no modify the original nodes oject passsed to diagram
       $nodes = $nodes.filter((node) => node.type === "position");
 
-      if ($nodes.length > 0) {
+      if ($nodes.length > 0 && diagramResult?.nodes?.length > 0) {
         $nodes.forEach((node) => {
           const nodeId = node.id;
           const { x, y } = node.position;
@@ -263,5 +265,7 @@ export default function useFlowBoard() {
     edges,
     stop: cancelDiagram,
     importJSONDiagram,
+    isOpenCode,
+    toggleOpenCode,
   };
 }

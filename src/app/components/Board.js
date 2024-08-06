@@ -19,10 +19,15 @@ import cls from "classnames";
 import useConfig from "../hooks/useConfig";
 import useFlowViewport from "../hooks/useFlowViewport";
 import useFlowJSON from "../hooks/useFlowJSON";
+import CustomNode from "./CustomNode";
+import { memo } from "react";
 
 const panOnDrag = [1, 2];
 const imageWidth = 1024;
 const imageHeight = 768;
+const nodeTypes = {
+  customNode: CustomNode,
+};
 
 function Board({
   nodes,
@@ -73,8 +78,6 @@ function Board({
     );
   };
 
-  console.log({ nodes, edges });
-
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <ReactFlow
@@ -87,7 +90,9 @@ function Board({
         onReconnectStart={onReconnectStart}
         onReconnectEnd={onReconnectEnd}
         onConnect={onConnect}
+        nodeTypes={nodeTypes}
         fitView={false}
+        proOptions={{ hideAttribution: true }}
         selectionOnDrag
         snapToGrid
         panOnDrag={panOnDrag}
@@ -138,4 +143,4 @@ function Board({
     </div>
   );
 }
-export default Board;
+export default memo(Board);

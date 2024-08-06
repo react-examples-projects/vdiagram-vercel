@@ -3,6 +3,8 @@ import DrawerMenu from "./DrawerMenu";
 import PromptInput from "./PromptInput";
 import SettingsButton from "./SettingsButton";
 import useFlowBoard from "../hooks/useFlowBoard";
+import DrawerCode from "./DrawerCode";
+import CodeButton from "./CodeButton";
 import Board from "./Board";
 
 export default function FlowBoard() {
@@ -26,11 +28,15 @@ export default function FlowBoard() {
     onChangeIsMagicText,
     generateDiagram,
     importJSONDiagram,
+    isOpenCode,
+    toggleOpenCode,
   } = useFlowBoard();
 
   return (
     <>
       <SettingsButton toggleOpen={toggleOpen} />
+
+      <CodeButton toggleOpen={toggleOpenCode} />
 
       <PromptInput
         {...{
@@ -56,6 +62,8 @@ export default function FlowBoard() {
           importJSONDiagram,
         }}
       />
+
+      <DrawerCode isOpen={isOpenCode} toggleOpen={toggleOpenCode} nodes={nodes} edges={edges} />
 
       <DrawerMenu
         {...{

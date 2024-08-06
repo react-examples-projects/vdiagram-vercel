@@ -163,6 +163,10 @@ button.submit {
   border-radius: 7px;
 }
 
+body .view-lines .view-line span {
+  font-family: "Source Code Pro", Consolas, monospace !important;
+}
+
 @for $i from 0 through 100 {
   .padding-#{$i} {
     padding: $i * 1px;

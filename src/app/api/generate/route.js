@@ -3,8 +3,6 @@ import { streamText, generateText } from "ai"; // Vercel AI sdk
 
 import systemPrompt from "@/app/constants/system";
 
-
-
 export const runtime = "edge";
 
 export function GET() {
@@ -32,7 +30,7 @@ export async function POST(req) {
       const { text } = await generateText({
         model: openai("gpt-4o-mini"),
         prompt,
-        system: `Extract all the requirements needed to create this diagram. Ensure the diagram is complete and detailed, including all identified requirements. Do not leave out any details and make sure that each requirement is clearly represented in the diagram, keep in mind that the diagram should be brief and short but with the requirements captured. The goal is to obtain a final diagram that accurately and completely reflects all the aspects necessary for its implementation. Send only the plain text of the requirements using a list format (not markdown or other special formatting)`,
+        system: `To improve the generation of diagrams, the prompt needs to address the issue of overly vertical diagrams by including conditionals and multiple flow outputs, making the diagrams more dynamic and flexible. Ensure that all identified requirements are clearly represented and that the diagram maintains brevity while capturing all necessary details. The final diagram should accurately and completely reflect all aspects required for its implementation, making it both comprehensive and easy to understand.`,
       });
       $prompt = text;
     }
