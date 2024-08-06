@@ -9,15 +9,21 @@ const defaultConfig = {
   imageFormat: "png",
   backgroundGap: 30,
   imageBackground: "current",
+  openAiApiKey: null  ,
 };
 
 const useStore = create(() => defaultConfig);
 
 export default function useConfig() {
-  const { theme, background, imageFormat, backgroundGap, imageBackground } = useStore();
+  const context = useStore();
   const saveConfig = () => {
     console.log("Saving config...");
     localStorage.setItem("config", JSON.stringify(useStore.getState()));
+  };
+
+  const setOpenAiApiKey = (openAiApiKey) => {
+    useStore.setState({ openAiApiKey });
+    saveConfig();
   };
 
   const setImageBackground = (imageBackground) => {
@@ -53,15 +59,12 @@ export default function useConfig() {
   }, []);
 
   return {
-    theme,
-    background,
-    imageFormat,
-    backgroundGap,
-    imageBackground,
+    ...context,
     setImageBackground,
     setBackgroundGap,
     setImageFormat,
     setTheme,
     setBackground,
+    setOpenAiApiKey,
   };
 }

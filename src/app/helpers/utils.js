@@ -1,7 +1,8 @@
 const SSR = typeof window === "undefined";
 
-const partialNodesRegex = /^\s*\{\s*"nodes"\s*:\s*\[.*\}\s*\,?\s*$/s;
-const partialEdgesRegex = /^\s*\{\s*"edges"\s*:\s*\[.*\}\s*\,?\s*$/s;
+const partialNodesRegex = /^\s*\{\s*"nodes"\s*:\s*\[.*\}\s*,?\s*$/s;
+const partialEdgesRegex = /^\s*\{\s*"edges"\s*:\s*\[.*\}\s*,?\s*$/s;
+
 
 export function parsePartialNodesJSON(jsonString) {
   try {

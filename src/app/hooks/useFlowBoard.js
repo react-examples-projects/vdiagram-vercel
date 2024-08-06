@@ -10,6 +10,7 @@ import {
 } from "../helpers/utils";
 import { addEdge, reconnectEdge, useNodesState, useEdgesState } from "@xyflow/react";
 import { useCompletion } from "ai/react";
+import useConfig from "../hooks/useConfig";
 
 const initialNodes = [
   {
@@ -68,6 +69,7 @@ const initialEdges = [
 ];
 
 export default function useFlowBoard() {
+  const { openAiApiKey } = useConfig();
   const { info, success, error, warn } = useToast();
   const diagramResult = getLocalStorage("diagramResult");
   const edgeReconnectSuccessful = useRef(true);
@@ -84,7 +86,7 @@ export default function useFlowBoard() {
     api: "/api/generate",
     onError: (err) => {
       console.error(err);
-      error("Error generating diagram");
+      error(err.message ?? "Error generating diagram");
     },
     onFinish: (prompt, data) => {
       const { nodes, edges } = JSON.parse(data);
@@ -171,9 +173,9 @@ export default function useFlowBoard() {
   const generateDiagram = useCallback(() => {
     info("Generating diagram...");
     complete(prompt, {
-      body: { isMagicText },
+      body: { isMagicText, openAiApiKey },
     });
-  }, [complete, prompt, info, isMagicText]);
+  }, [complete, prompt, info, isMagicText, openAiApiKey]);
 
   const cancelDiagram = useCallback(() => {
     warn("Cancelled diagram generation");

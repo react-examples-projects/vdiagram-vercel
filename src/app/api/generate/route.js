@@ -3,13 +3,7 @@ import { streamText, generateText } from "ai"; // Vercel AI sdk
 
 import systemPrompt from "@/app/constants/system";
 
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error("Missing env var from OpenAI");
-}
 
-const openai = createOpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 export const runtime = "edge";
 
@@ -19,14 +13,20 @@ export function GET() {
 
 export async function POST(req) {
   try {
-    const { prompt, isMagicText } = await req.json();
+    const { prompt, isMagicText, openAiApiKey } = await req.json();
     let $prompt = prompt;
 
     if (!prompt) {
       return new Response("Prompt is required", { status: 400 });
     }
 
-    console.log({ isMagicText });
+    if (!openAiApiKey && !process.env.OPENAI_API_KEY) {
+      throw new Error("Missing env var from OpenAI");
+    }
+
+    const openai = createOpenAI({
+      apiKey: openAiApiKey || process.env.OPENAI_API_KEY,
+    });
 
     if (isMagicText) {
       const { text } = await generateText({

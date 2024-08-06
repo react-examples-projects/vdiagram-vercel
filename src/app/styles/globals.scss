@@ -1,9 +1,22 @@
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #fff; 
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   font-family: Inter, sans-serif;
 }
+
 
 html,
 body {

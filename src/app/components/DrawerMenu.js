@@ -1,5 +1,5 @@
 "use client";
-import { Drawer, Checkbox, Select, Text, Note } from "@geist-ui/core";
+import { Drawer, Checkbox, Select, Text, Note, Input } from "@geist-ui/core";
 import useConfig from "../hooks/useConfig";
 import Slider from "rc-slider";
 
@@ -15,6 +15,8 @@ export default function DrawerMenu({ isOpen, toggleOpen, isMagicText, onChangeIs
     setBackgroundGap,
     imageBackground,
     setImageBackground,
+    setOpenAiApiKey,
+    openAiApiKey,
   } = useConfig();
 
   return (
@@ -40,6 +42,21 @@ export default function DrawerMenu({ isOpen, toggleOpen, isMagicText, onChangeIs
           <Note type="warning">
             By activating this option, the diagrams may take longer to generate; you will obtain a
             better result in exchange for waiting more processing time.
+          </Note>
+        )}
+
+        <label className="block ma-20 mi-10">OpenAI API Key</label>
+        <Input
+          htmlType="password"
+          width="100%"
+          onChange={(e) => setOpenAiApiKey(e.target.value)}
+          placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          value={openAiApiKey}
+          // onChange={onChangeOpenAiApiKey}
+        />
+        {!openAiApiKey && (
+          <Note type="warning" style={{ marginTop: "0.5rem" }}>
+            By default, if a valid key is not found, a default key will be used.
           </Note>
         )}
 

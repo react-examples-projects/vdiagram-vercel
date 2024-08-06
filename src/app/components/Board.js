@@ -11,8 +11,9 @@ import {
 } from "@xyflow/react";
 import { Button } from "@geist-ui/core";
 import { memo } from "react";
-import { FiDownload } from "react-icons/fi";
-import { TbFileExport } from "react-icons/tb";
+import { GrDocumentDownload } from "react-icons/gr";
+import { GrDocumentImage } from "react-icons/gr";
+
 import { toPng, toJpeg, toSvg } from "html-to-image";
 import { downloadFile } from "../helpers/utils";
 import cls from "classnames";
@@ -105,7 +106,7 @@ function Board({
             aria-label="Download as image"
             type="abort"
             onClick={downloadImageEvent}
-            iconRight={<FiDownload color={theme === "dark" ? "#fff" : "#000"} />}
+            iconRight={<GrDocumentImage color={theme === "dark" ? "#fff" : "#000"} />}
             scale={2.5}
             auto
           />
@@ -115,7 +116,7 @@ function Board({
             aria-label="Export as JSON"
             type="abort"
             onClick={exportDiagramJSON}
-            iconRight={<TbFileExport color={theme === "dark" ? "#fff" : "#000"} />}
+            iconRight={<GrDocumentDownload color={theme === "dark" ? "#fff" : "#000"} />}
             scale={2.5}
             auto
           />
