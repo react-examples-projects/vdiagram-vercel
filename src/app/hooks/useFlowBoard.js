@@ -229,7 +229,7 @@ export default function useFlowBoard() {
     setNodes(nodes);
     setEdges(edges);
   }, [setEdges, setNodes]);
-  
+
   useEffect(() => {
     if (!completion) return;
 
@@ -263,6 +263,8 @@ export default function useFlowBoard() {
     generateDiagram,
     nodes,
     edges,
+    setNodes,
+    setEdges,
     stop: cancelDiagram,
     importJSONDiagram,
     isOpenCode,

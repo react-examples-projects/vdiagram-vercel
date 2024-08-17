@@ -20,6 +20,7 @@ import useConfig from "../hooks/useConfig";
 import useFlowViewport from "../hooks/useFlowViewport";
 import useFlowJSON from "../hooks/useFlowJSON";
 import CustomNode from "./CustomNode";
+import CodeButton from "./CodeButton";
 import { memo } from "react";
 
 const panOnDrag = [1, 2];
@@ -39,6 +40,7 @@ function Board({
   onReconnect,
   onReconnectStart,
   importJSONDiagram,
+  toggleOpenCode,
 }) {
   const viewport = useFlowViewport();
   const { exportDiagramJSON } = useFlowJSON();
@@ -118,7 +120,6 @@ function Board({
             scale={2.5}
             auto
           />
-
           <Button
             title="Export as JSON"
             aria-label="Export as JSON"
@@ -128,7 +129,6 @@ function Board({
             scale={2.5}
             auto
           />
-
           <Button
             title="Import JSON"
             aria-label="Import JSON"
@@ -138,6 +138,7 @@ function Board({
             scale={2.8}
             auto
           />
+          <CodeButton toggleOpen={toggleOpenCode} />
         </div>
       </ReactFlow>
     </div>

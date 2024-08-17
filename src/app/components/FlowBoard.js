@@ -4,7 +4,6 @@ import PromptInput from "./PromptInput";
 import SettingsButton from "./SettingsButton";
 import useFlowBoard from "../hooks/useFlowBoard";
 import DrawerCode from "./DrawerCode";
-import CodeButton from "./CodeButton";
 import Board from "./Board";
 
 export default function FlowBoard() {
@@ -14,6 +13,8 @@ export default function FlowBoard() {
     onReconnectStart,
     nodes,
     edges,
+    setEdges,
+    setNodes,
     onNodesChange,
     onEdgesChange,
     onConnect,
@@ -35,8 +36,6 @@ export default function FlowBoard() {
   return (
     <>
       <SettingsButton toggleOpen={toggleOpen} />
-
-      <CodeButton toggleOpen={toggleOpenCode} />
 
       <PromptInput
         {...{
@@ -60,10 +59,20 @@ export default function FlowBoard() {
           onReconnectStart,
           onReconnectEnd,
           importJSONDiagram,
+          toggleOpenCode,
         }}
       />
 
-      <DrawerCode isOpen={isOpenCode} toggleOpen={toggleOpenCode} nodes={nodes} edges={edges} />
+      <DrawerCode
+        isOpen={isOpenCode}
+        toggleOpen={toggleOpenCode}
+        {...{
+          nodes,
+          edges,
+          setEdges,
+          setNodes,
+        }}
+      />
 
       <DrawerMenu
         {...{
