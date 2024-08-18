@@ -1,7 +1,6 @@
 "use client";
 import DrawerMenu from "./DrawerMenu";
 import PromptInput from "./PromptInput";
-import SettingsButton from "./SettingsButton";
 import useFlowBoard from "../hooks/useFlowBoard";
 import DrawerCode from "./DrawerCode";
 import Board from "./Board";
@@ -35,8 +34,6 @@ export default function FlowBoard() {
 
   return (
     <>
-      <SettingsButton toggleOpen={toggleOpen} />
-
       <PromptInput
         {...{
           isLoading,
@@ -49,6 +46,7 @@ export default function FlowBoard() {
       />
 
       <Board
+        toggleOpenSettings={toggleOpen}
         {...{
           edges,
           nodes,

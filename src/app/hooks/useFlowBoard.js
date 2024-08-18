@@ -245,6 +245,18 @@ export default function useFlowBoard() {
     }
   }, [completion, setNodes, setEdges]);
 
+  useEffect(() => {
+    const diagramResult = getLocalStorage("diagramResult");
+    if(!diagramResult){
+      setLocalStorage("diagramResult", {
+        nodes,
+        edges,
+        prompt,
+      });
+    }
+  }, [nodes, edges, prompt]);
+
+
   return {
     onReconnectEnd,
     onReconnect,

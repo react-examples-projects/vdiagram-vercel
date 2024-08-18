@@ -9,7 +9,7 @@ import {
   getNodesBounds,
   getViewportForBounds,
 } from "@xyflow/react";
-import { Button } from "@geist-ui/core";
+import { Button, Tooltip } from "@geist-ui/core";
 import { GrDocumentDownload } from "react-icons/gr";
 import { GrDocumentImage } from "react-icons/gr";
 import { BsFiletypeJson } from "react-icons/bs";
@@ -20,6 +20,7 @@ import useConfig from "../hooks/useConfig";
 import useFlowViewport from "../hooks/useFlowViewport";
 import useFlowJSON from "../hooks/useFlowJSON";
 import CustomNode from "./CustomNode";
+import SettingsButton from "./SettingsButton";
 import CodeButton from "./CodeButton";
 import { memo } from "react";
 
@@ -41,6 +42,7 @@ function Board({
   onReconnectStart,
   importJSONDiagram,
   toggleOpenCode,
+  toggleOpenSettings,
 }) {
   const viewport = useFlowViewport();
   const { exportDiagramJSON } = useFlowJSON();
@@ -111,34 +113,82 @@ function Board({
           nodeColor={theme === "dark" ? "#eee" : "#525252"}
         />
         <div className="controls">
-          <Button
-            title="Download as image"
-            aria-label="Download as image"
-            type="abort"
-            onClick={downloadImageEvent}
-            iconRight={<GrDocumentImage color={theme === "dark" ? "#fff" : "#000"} />}
-            scale={2.5}
-            auto
-          />
-          <Button
-            title="Export as JSON"
-            aria-label="Export as JSON"
-            type="abort"
-            onClick={exportDiagramJSON}
-            iconRight={<GrDocumentDownload color={theme === "dark" ? "#fff" : "#000"} />}
-            scale={2.5}
-            auto
-          />
-          <Button
-            title="Import JSON"
-            aria-label="Import JSON"
-            type="abort"
-            onClick={importJSONDiagram}
-            iconRight={<BsFiletypeJson color={theme === "dark" ? "#fff" : "#000"} />}
-            scale={2.8}
-            auto
-          />
-          <CodeButton toggleOpen={toggleOpenCode} />
+          <Tooltip
+            text="Settings"
+            width="180px"
+            style={{ textAlign: "center" }}
+            placement="leftStart"
+            leaveDelay={0}
+            hideArrow
+          >
+            <SettingsButton toggleOpen={toggleOpenSettings} />
+          </Tooltip>
+
+          <Tooltip
+            text="Download as image"
+            width="180px"
+            style={{ textAlign: "center" }}
+            placement="leftStart"
+            leaveDelay={0}
+            hideArrow
+          >
+            <Button
+              title="Download as image"
+              aria-label="Download as image"
+              type="abort"
+              onClick={downloadImageEvent}
+              iconRight={<GrDocumentImage color={theme === "dark" ? "#fff" : "#000"} />}
+              scale={2.5}
+              auto
+            />
+          </Tooltip>
+          <Tooltip
+            text="Export as JSON"
+            width="180px"
+            style={{ textAlign: "center" }}
+            placement="leftStart"
+            leaveDelay={0}
+            hideArrow
+          >
+            <Button
+              title="Export as JSON"
+              aria-label="Export as JSON"
+              type="abort"
+              onClick={exportDiagramJSON}
+              iconRight={<GrDocumentDownload color={theme === "dark" ? "#fff" : "#000"} />}
+              scale={2.5}
+              auto
+            />
+          </Tooltip>
+
+          <Tooltip
+            text="Import JSON"
+            width="180px"
+            style={{ textAlign: "center" }}
+            placement="leftStart"
+            leaveDelay={0}
+            hideArrow
+          >
+            <Button
+              title="Import JSON"
+              aria-label="Import JSON"
+              type="abort"
+              onClick={importJSONDiagram}
+              iconRight={<BsFiletypeJson color={theme === "dark" ? "#fff" : "#000"} />}
+              scale={2.8}
+              auto
+            />
+          </Tooltip>
+          <Tooltip
+            text="See json code"
+            width="180px"
+            style={{ textAlign: "center" }}
+            placement="leftStart"
+            leaveDelay={0}
+            hideArrow
+          >
+            <CodeButton toggleOpen={toggleOpenCode} />
+          </Tooltip>
         </div>
       </ReactFlow>
     </div>

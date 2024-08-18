@@ -12,7 +12,7 @@ export default function SettingsButton({ toggleOpen }) {
       aria-label="Settings"
       iconRight={<RiSettings5Fill color={theme === "dark" ? "#fff" : "#000"} />}
       type="abort"
-      scale={2.5}
+      scale={2.7}
       onClick={toggleOpen}
       auto
     />

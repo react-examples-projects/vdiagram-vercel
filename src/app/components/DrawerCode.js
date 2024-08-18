@@ -15,7 +15,7 @@ export default function DrawerCode({ isOpen, toggleOpen, nodes, edges, setNodes,
 
   const onChange = (value) => {
     const { nodes, edges } = JSON.parse(value);
-    console.log({ nodes, edges });
+
     if (nodes.length > 0) {
       setNodes(nodes);
     }
@@ -27,7 +27,7 @@ export default function DrawerCode({ isOpen, toggleOpen, nodes, edges, setNodes,
   };
 
   const restoreDiagram = () => {
-    const { nodes, edges } = getLocalStorage("diagramResult");
+    const { nodes, edges } =  getLocalStorage("diagramResult");
     console.log(JSON.stringify({ nodes, edges }, null, 2));
     setNodes(nodes);
     setEdges(edges);

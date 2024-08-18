@@ -3,11 +3,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #000; 
+  background: #000;
 }
- 
+
 ::-webkit-scrollbar-thumb {
-  background: #fff; 
+  background: #fff;
 }
 
 * {
@@ -16,7 +16,6 @@
   margin: 0;
   font-family: Inter, sans-serif;
 }
-
 
 html,
 body {
@@ -43,10 +42,6 @@ svg {
 }
 
 .settings-button {
-  position: absolute !important;
-  top: 1rem;
-  right: 2rem;
-  z-index: 999;
   border-radius: 999px !important;
   padding: 1rem !important;
   height: auto !important;
@@ -55,9 +50,11 @@ svg {
 .controls {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute !important;
-  top: 4.5rem;
-  right: 2rem;
+  top: 1rem;
+  right: 1rem;
   z-index: 999;
 
   > button {
@@ -152,6 +149,10 @@ button.submit {
   width: 8px !important;
   height: 8px !important;
   background-color: #eeeeeea9 !important;
+}
+
+.tooltip-content > div {
+  text-align: center !important;
 }
 
 .input-loader {
