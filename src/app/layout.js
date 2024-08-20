@@ -4,6 +4,8 @@ import "./styles/globals.scss";
 import "@xyflow/react/dist/style.css";
 import "rc-slider/assets/index.css";
 import "loaders.css/src/animations/ball-pulse-sync.scss";
+import "react-loading-skeleton/dist/skeleton.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

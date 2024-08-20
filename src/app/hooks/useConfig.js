@@ -2,14 +2,17 @@
 
 import { create } from "zustand";
 import { useEffect } from "react";
+import { getLocalStorage } from "../helpers/utils";
+
+const config = getLocalStorage("config");
 
 const defaultConfig = {
-  theme: "light",
+  theme: config?.theme ?? "light",
   background: "dots",
   imageFormat: "png",
   backgroundGap: 30,
   imageBackground: "current",
-  openAiApiKey: null  ,
+  openAiApiKey: null,
 };
 
 const useStore = create(() => defaultConfig);
