@@ -12,7 +12,6 @@ export default function Home() {
   return (
     <main>
       <FlowBoard />
-      {/* <FlowBoardSkeleton /> */}
     </main>
   );
 }
